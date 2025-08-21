@@ -1,4 +1,4 @@
-name: Windows - RustDesk
+name: Linux - RustDesk
 
 on:
   workflow_dispatch:
@@ -6,17 +6,20 @@ on:
 jobs:
   build:
     name: Start Building...
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 9999
-    
+
     steps:
-      - name: Downloading & Installing Essentials
+      - name: Descargar e instalar dependencias
         run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/qdyd4p9t6xoabl95n5o3g/Downloads.bat?rlkey=snr74vv1vr8k5suujugvrhjtm&dl=1" -OutFile "Downloads.bat"
-          cmd /c Downloads.bat
+          wget -O Downloads.sh "https://www.dropbox.com/scl/fi/xxxxx/Downloads.sh?dl=1"
+          chmod +x Downloads.sh
+          ./Downloads.sh
 
-      - name: Log In To AnyDesk
-        run: cmd /c show.bat
+      - name: Iniciar sesión en AnyDesk (ejemplo)
+        run: |
+          chmod +x show.sh
+          ./show.sh
 
-      - name: Time Counter
-        run: python time.py
+      - name: Contador de tiempo
+        run: python3 time.py
